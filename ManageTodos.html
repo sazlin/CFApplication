@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+<form onsubmit="return false">
+   Add ToDo: 
+   <input type="text" id="NewTodoItemTextField"
+   onkeydown="checkKey(event)">
+   <input type="button" id="AddButton" value="Add To List"
+   onClick="addTodoItemToList()"><br>
+</form>	
+<ul id="todolist">
+</ul>
+</body>
+</html>
+
+<script type="text/javaScript">
+function checkKey(event){
+   if(event.keyCode == 13){
+      addTodoItemToList();
+   }
+}
+
+function addTodoItemToList(){
+   var TodoText = document.getElementById("NewTodoItemTextField").value;
+   if(TodoText.length>0){ 
+      document.getElementById("NewTodoItemTextField").value = "";
+      var ToDoItemList = document.getElementById("todolist");
+      var newListItem = document.createElement("li");
+      var newListItemText = document.createTextNode(TodoText);
+      newListItem.onclick = removeItemFromList;
+      newListItem.appendChild(newListItemText);
+      ToDoItemList.insertBefore(newListItem,ToDoItemList.childNodes[0]);
+   }
+}
+
+function removeItemFromList(){
+   var ToDoItemList = document.getElementById("todolist");
+   ToDoItemList.removeChild(this);
+}
+</script>
